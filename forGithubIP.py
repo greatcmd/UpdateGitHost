@@ -19,9 +19,21 @@ import pip
 def install(package):
     pip.main(['install', package])
 
-install('requests')
-install('BeautifulSoup')
-install('pywin32')
+#install('requests')
+#install('BeautifulSoup')
+#install('pywin32')
+import sys
+import subprocess
+import pkg_resources
+
+
+required = {'requests', 'BeautifulSoup', 'pywin32'}
+installed = {pkg.key for pkg in pkg_resources.working_set}
+missing = required - installed
+
+if missing:
+    for pkg in missing:
+        install(pkg)
 
 
 #check admin
